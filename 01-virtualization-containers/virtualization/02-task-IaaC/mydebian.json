@@ -1,0 +1,37 @@
+{
+    "builders": [
+        {
+            "type": "yandex",
+            "token": "xxxxxx",
+            "folder_id": "xxxxx",
+            "zone": "ru-central1-b",
+            "image_name": "debian-11-docker",
+            "image_description": "my custom debian with docker",
+            "source_image_family": "debian-11",
+            "subnet_id": "xxxxx",
+            "use_ipv4_nat": true,
+            "disk_type": "network-hdd",
+            "ssh_username": "debian"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline": [
+                "echo 'hello from packer'"
+            ]
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "sudo sed -i '/bullseye-backports/ s/^/#/' /etc/apt/sources.list",
+                "sudo apt-get update",
+                "sudo apt-get install -y htop tmux curl",
+                "curl -fsSL https://get.docker.com -o get-docker.sh",
+                "sh get-docker.sh",
+                "sudo usermod -aG docker $USER",
+                "rm get-docker.sh"
+            ]
+        }
+    ]
+}
