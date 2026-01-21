@@ -124,8 +124,24 @@ If you removed or renamed this service in your compose file, you can run this co
 > Docker Compose нашёл «осиротевший» контейнер task5-portainer-1, который больше не описан в манифесте проекта.
 
 **Скриншоты**
-
+![](images/task5.1.png)
 ![](images/task5.png)
+
+**Файл compose.yaml**
+
+[Открыть compose.yaml](compose.yaml)
+
+
+```yaml
+include:
+  - docker-compose.yaml
+services:
+  portainer:
+    network_mode: host
+    image: portainer/portainer-ce:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+```
 
 **Команды для выполнения задания**
 ```bash
