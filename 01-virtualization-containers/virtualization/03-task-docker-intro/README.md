@@ -1,7 +1,5 @@
 # Практическое задание по занятию "Оркестрация группой Docker контейнеров на примере Docker Compose."
 
-![Логотип проекта](images/logo.png)
-
 ## Задача 1
 
 ### Условие ответа:
@@ -13,7 +11,6 @@
 https://hub.docker.com/repository/docker/patebash/custom-nginx/general
 
 ---
-
 ## Задача 2
 
 ### Условие ответа:
@@ -49,7 +46,6 @@ docker exec -it custom-nginx-t2 base64 /usr/share/nginx/html/index.html
 curl http://127.0.0.1:8080/
 ```
 ---
-
 ## Задача 3
 
 ### Условие ответа:
