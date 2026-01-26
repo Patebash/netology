@@ -51,8 +51,8 @@
 
 ### Ответ:
 
+[Открыть отчет сканирования](vulnerabilities.csv)
 ![](images/task2.png)
 
-[Открыть отчет сканирования](vulnerabilities.csv)
 
 ---
