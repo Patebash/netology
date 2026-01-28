@@ -69,3 +69,17 @@
 ![](images/task3.png)
 
 ---
+
+## Задача 4
+
+### Условие ответа:
+
+> Повторите SQL-запрос на сервере и приложите скриншот и ссылку на fork.
+
+### Ответ:
+
+[Ссылка на fork](https://github.com/Patebash/shvirtd-example-python.git)
+
+![](images/task4.png)
+
+---
