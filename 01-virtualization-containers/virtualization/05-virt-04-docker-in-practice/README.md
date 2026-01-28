@@ -83,3 +83,19 @@
 ![](images/task4.png)
 
 ---
+
+## Задача 5
+
+### Условие ответа:
+
+> Предоставьте скрипт, cron-task и скриншот с несколькими резервными копиями в "/opt/backup"
+
+### Ответ:
+
+[Скрипт mysql_backup.sh](mysql_backup.sh)
+
+[Crontask](pat)
+
+![](images/task5.png)
+
+---
