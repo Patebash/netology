@@ -112,6 +112,12 @@
 
 ![](images/task6.png)
 
+**Доработка: dive и docker save**
+
+![](images/task6_dive.png)
+
+![](images/task6_dive1.png)
+
 ---
 
 ## Задача 6.1
