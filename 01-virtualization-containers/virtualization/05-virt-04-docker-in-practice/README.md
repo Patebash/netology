@@ -112,11 +112,12 @@
 
 ![](images/task6.png)
 
-**Доработка: dive и docker save**
 
-![](images/task6_dive.png)
+# Доработка: *dive и docker save*
 
-![](images/task6_dive1.png)
+![](images/task_6_dive.png)
+
+![](images/task_6_dive1.png)
 
 ---
 
