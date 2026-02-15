@@ -94,6 +94,8 @@ pat@net-dev01:~/ter-homeworks/01/src$ terraform validate
 
 ### Ответ:
 
+[Открыть main.tf](src/main.tf)
+
 ```
 resource "docker_image" "nginx" {
   name         = "nginx:latest"
@@ -176,6 +178,8 @@ pat@net-dev01:~/ter-homeworks/01/src$
 
 ### Ответ:
 
+[Открыть main.tf](src/main.tf)
+
 ```
 resource "docker_image" "nginx" {
   name         = "nginx:latest"
@@ -189,4 +193,5 @@ resource "docker_image" "nginx" {
 В коде значение указано true, поэтому образ не был удален локально.
 
 ---
+
 
