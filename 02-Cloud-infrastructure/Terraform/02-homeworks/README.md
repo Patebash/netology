@@ -81,3 +81,32 @@
 
 ---
 
+## Задание 4
+
+### Условие ответа:
+
+> Объявите в файле outputs.tf один output , содержащий: instance_name, external_ip, fqdn для каждой из ВМ в удобном лично для вас формате.(без хардкода!!!)
+> Примените изменения.
+> В качестве решения приложите вывод значений ip-адресов команды terraform output.
+
+### Ответ:
+
+```
+$ terraform output
+vm_info = {
+  "db" = {
+    "external_ip" = "178.154.193.27"
+    "fqdn" = "epdb02jgl2hu4jgg2vlk.auto.internal"
+    "instance_name" = "netology-develop-platform-db"
+  }
+  "web" = {
+    "external_ip" = "46.21.244.25"
+    "fqdn" = "fhmk7e73iaavvolfluus.auto.internal"
+    "instance_name" = "netology-develop-platform-web"
+  }
+}
+```
+
+[Открыть outputs.tf](src/outputs.tf)
+
+---
