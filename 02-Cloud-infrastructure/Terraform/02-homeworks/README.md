@@ -60,4 +60,53 @@
 
 [Открыть variables.tf](src/variables.tf)
 
+---
 
+## Задание 3
+
+### Условие ответа:
+
+> Создайте в корне проекта файл 'vms_platform.tf' . Перенесите в него все переменные первой ВМ.
+> Скопируйте блок ресурса и создайте с его помощью вторую ВМ в файле main.tf: "netology-develop-platform-db" , cores  = 2, memory = 2, core_fraction = 20.
+> Объявите её переменные с префиксом vm_db_ в том же файле ('vms_platform.tf'). ВМ должна работать в зоне "ru-central1-b"
+> Примените изменения.
+
+### Ответ:
+
+![YC](images/task3.png)
+
+[Открыть main.tf](src/main.tf)
+
+[Открыть vms_platform.tf](src/vms_platform.tf)
+
+---
+
+## Задание 4
+
+### Условие ответа:
+
+> Объявите в файле outputs.tf один output , содержащий: instance_name, external_ip, fqdn для каждой из ВМ в удобном лично для вас формате.(без хардкода!!!)
+> Примените изменения.
+> В качестве решения приложите вывод значений ip-адресов команды terraform output.
+
+### Ответ:
+
+```
+$ terraform output
+vm_info = {
+  "db" = {
+    "external_ip" = "178.154.193.27"
+    "fqdn" = "epdb02jgl2hu4jgg2vlk.auto.internal"
+    "instance_name" = "netology-develop-platform-db"
+  }
+  "web" = {
+    "external_ip" = "46.21.244.25"
+    "fqdn" = "fhmk7e73iaavvolfluus.auto.internal"
+    "instance_name" = "netology-develop-platform-web"
+  }
+}
+```
+
+[Открыть outputs.tf](src/outputs.tf)
+
+---
