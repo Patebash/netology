@@ -28,15 +28,6 @@ variable "vpc_name" {
   description = "VPC network & subnet name"
 }
 
-
-###ssh vars
-
-variable "vms_ssh_root_key" {
-  type        = string
-  default     = "<your_ssh_ed25519_key>"
-  description = "ssh-keygen -t ed25519"
-}
-
 ###image and vm vars
 
 variable "vm_web_name" {
@@ -49,21 +40,6 @@ variable "vm_web_platform_id" {
   default = "standard-v3"
 }
 
-variable "vm_web_cores" {
-  type    = number
-  default = 2
-}
-
-variable "vm_web_memory" {
-  type    = number
-  default = 1
-}
-
-variable "vm_web_core_fraction" {
-  type    = number
-  default = 20
-}
-
 variable "vm_web_preemptible" {
   type    = bool
   default = true
@@ -74,12 +50,25 @@ variable "vm_web_nat" {
   default = true
 }
 
-variable "vm_web_serial_port_enable" {
-  type    = number
-  default = 1
-}
-
 variable "vm_web_image_family" {
   type    = string
   default = "ubuntu-2004-lts"
+}
+
+variable "vms_resources" {
+  description = "Resources configuration for all VMs"
+  type = map(object({
+    cores         = number
+    memory        = number
+    core_fraction = number
+    hdd_size      = number
+    hdd_type      = string
+  }))
+}
+
+###metadata
+
+variable "metadata" {
+  description = "Common metadata for all VMs"
+  type = map(string)
 }
