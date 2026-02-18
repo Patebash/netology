@@ -40,17 +40,17 @@ variable "vm_db_serial_port_enable" {
   default = 1
 }
 
-variable "subnet_db_zone" {
+variable "vm_db_subnet_zone" {
   type    = string
   default = "ru-central1-b"
 }
 
-variable "subnet_db_name" {
+variable "vm_db_subnet_name" {
   type    = string
   default = "develop_db"
 }
 
-variable "subnet_db_cidr" {
+variable "vm_db_subnet_cidr" {
   type        = list(string)
   default     = ["10.0.2.0/24"]
   description = "https://cloud.yandex.ru/docs/vpc/operations/subnet-create"
