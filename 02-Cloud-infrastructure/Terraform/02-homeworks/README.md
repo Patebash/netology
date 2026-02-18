@@ -110,3 +110,34 @@ vm_info = {
 [Открыть outputs.tf](src/outputs.tf)
 
 ---
+
+## Задание 5
+
+### Условие ответа:
+
+> В файле locals.tf опишите в одном local-блоке имя каждой ВМ, используйте интерполяцию ${..} с НЕСКОЛЬКИМИ переменными по примеру из лекции.
+> Замените переменные внутри ресурса ВМ на созданные вами local-переменные.
+> Примените изменения.
+
+### Ответ:
+
+```
+$ terraform output
+vm_info = {
+  "db" = {
+    "external_ip" = "84.201.152.126"
+    "fqdn" = "netology-develop-platform-db-ru-central1-b.ru-central1.internal"
+    "instance_name" = "netology-develop-platform-db"
+  }
+  "web" = {
+    "external_ip" = "46.21.244.25"
+    "fqdn" = "netology-develop-platform-web-ru-central1-a.ru-central1.internal"
+    "instance_name" = "netology-develop-platform-web"
+  }
+}
+
+```
+
+[Открыть locals.tf](src/locals.tf)
+
+---
