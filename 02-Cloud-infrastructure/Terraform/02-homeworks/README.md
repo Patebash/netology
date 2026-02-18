@@ -141,3 +141,43 @@ vm_info = {
 [Открыть locals.tf](src/locals.tf)
 
 ---
+
+## Задание 6
+
+### Условие ответа:
+
+> Вместо использования трёх переменных ".._cores",".._memory",".._core_fraction" в блоке resources {...}, объедините их в единую map-переменную vms_resources и внутри неё конфиги обеих ВМ в виде вложенного map(object).
+> Создайте и используйте отдельную map(object) переменную для блока metadata, она должна быть общая для всех ваших ВМ.
+> Найдите и закоментируйте все, более не используемые переменные проекта. Проверьте terraform plan. Изменений быть не должно.
+
+### Ответ:
+
+[Открыть main.tf](src/main.tf)
+
+[Открыть variables.tf](src/variables.tf)
+
+```
+$ cat terraform.tfvars
+vms_resources = {
+  web = {
+    cores         = 2
+    memory        = 1
+    core_fraction = 20
+    hdd_size      = 5
+    hdd_type      = "network-hdd"
+  },
+  db = {
+    cores         = 2
+    memory        = 2
+    core_fraction = 20
+    hdd_size      = 5
+    hdd_type      = "network-hdd"
+  }
+}
+
+metadata = {
+  serial-port-enable = 1
+  ssh-keys           = "ubuntu:ssh-ed25519 AAAAC..."
+  }
+
+```
