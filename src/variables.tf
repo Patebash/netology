@@ -83,3 +83,56 @@ variable "vm_web_nat" {
   type    = bool
   default = true
 }
+
+# VM storage vars
+
+variable "disk_size" {
+  description = "Size disk"
+  type        = number
+  default     = 1
+}
+
+variable "disk_type" {
+  description = "Type disk"
+  type        = string
+  default     = "network-hdd"
+}
+
+variable "vm_name" {
+  description = "Name VM"
+  type        = string
+  default     = "netology-develop-platform-storage"
+}
+
+variable "vm_cores" {
+  description = "CPU VM"
+  type        = number
+  default     = 2
+}
+
+variable "vm_memory" {
+  description = "RAM VM"
+  type        = number
+  default     = 2
+}
+
+variable "vm_core_fraction" {
+  description = "core fraction"
+  type        = number
+  default     = 20
+}
+
+
+# Disk vars
+
+variable "vm_boot_disk_size" {
+  description = "Boot disk size"
+  type        = number
+  default     = 10
+}
+
+variable "vm_boot_disk_type" {
+  description = "Boot disk type"
+  type        = string
+  default     = "network-hdd"
+}
