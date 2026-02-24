@@ -54,3 +54,17 @@ variable "each_vm" {
 
 ---
 
+## Задание 4
+
+### Условие ответа:
+
+> Выполните код. Приложите скриншот получившегося файла hosts.ini.
+
+### Ответ:
+
+[Открыть inventory.tf](src/inventory.tf)
+
+[Открыть hosts.tftpl](src/hosts.tftpl)
+
+![hosts](images/task4.png)
+
