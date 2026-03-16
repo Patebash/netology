@@ -1,0 +1,15 @@
+services:
+
+  centos7:
+    build:
+      context: .
+      dockerfile: Dockerfile.centos
+    container_name: centos7
+    tty: true
+
+  ubuntu:
+    build:
+      context: .
+      dockerfile: Dockerfile.ubuntu
+    container_name: ubuntu
+    tty: true

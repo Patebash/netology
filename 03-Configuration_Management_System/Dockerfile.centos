@@ -1,0 +1,7 @@
+FROM centos/python-36-centos7
+
+# Рабочий каталог
+WORKDIR /root
+
+# Контейнер просто “спит”, Ansible подключается к нему
+CMD ["sleep", "infinity"]
