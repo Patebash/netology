@@ -1,0 +1,111 @@
+---
+- name: Install Clickhouse and Vector
+  hosts: clickhouse
+  become: true
+
+  handlers:
+    - name: Start clickhouse service
+      ansible.builtin.service:
+        name: clickhouse-server
+        state: restarted
+
+    - name: Restart vector service
+      ansible.builtin.systemd:
+        name: vector
+        state: restarted
+
+  tasks:
+    # -------------------------------
+    # ClickHouse
+    # -------------------------------
+    - block:
+        - name: Get clickhouse distrib
+          ansible.builtin.get_url:
+            url: "https://packages.clickhouse.com/rpm/stable/{{ item }}-{{ clickhouse_version }}.noarch.rpm"
+            dest: "./{{ item }}-{{ clickhouse_version }}.rpm"
+          loop: "{{ clickhouse_packages }}"
+      rescue:
+        - name: Get clickhouse distrib (common-static)
+          ansible.builtin.get_url:
+            url: "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
+            dest: "./clickhouse-common-static-{{ clickhouse_version }}.rpm"
+
+    - name: Install clickhouse packages
+      ansible.builtin.yum:
+        name:
+          - clickhouse-common-static-{{ clickhouse_version }}.rpm
+          - clickhouse-client-{{ clickhouse_version }}.rpm
+          - clickhouse-server-{{ clickhouse_version }}.rpm
+        disable_gpg_check: yes
+      notify: Start clickhouse service
+
+    - name: Flush clickhouse handlers
+      meta: flush_handlers
+
+    - name: Create ClickHouse database
+      ansible.builtin.command: "clickhouse-client -q 'create database logs;'"
+      register: create_db
+      failed_when: create_db.rc != 0 and create_db.rc != 82
+      changed_when: create_db.rc == 0
+
+    # -------------------------------
+    # Vector
+    # -------------------------------
+    - name: Ensure vector user exists
+      ansible.builtin.user:
+        name: "{{ vector_user }}"
+        system: true
+        shell: /sbin/nologin
+
+    - name: Ensure vector installation directory exists
+      ansible.builtin.file:
+        path: "{{ vector_install_dir }}"
+        state: directory
+        owner: "{{ vector_user }}"
+        group: "{{ vector_group }}"
+        mode: '0755'
+
+    - name: Ensure Vector config directory exists
+      ansible.builtin.file:
+        path: "{{ vector_install_dir }}/etc"
+        state: directory
+        owner: "{{ vector_user }}"
+        group: "{{ vector_group }}"
+        mode: '0755'
+
+    - name: Extract Vector tarball
+      ansible.builtin.unarchive:
+        src: "/tmp/vector-{{ vector_version }}.tar.gz"
+        dest: "{{ vector_install_dir }}"
+        remote_src: yes
+        extra_opts: [--strip-components=2]
+
+    - name: Deploy Vector configuration
+      ansible.builtin.template:
+        src: "templates/vector.yml.j2"
+        dest: "{{ vector_install_dir }}/etc/vector.yml"
+      notify: Restart vector service
+
+    - name: Create Vector systemd service
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/vector.service
+        content: |
+          [Unit]
+          Description=Vector agent
+          After=network.target
+
+          [Service]
+          User={{ vector_user }}
+          ExecStart={{ vector_install_dir }}/bin/vector -c {{ vector_install_dir }}/etc/vector.yml
+          Restart=always
+
+          [Install]
+          WantedBy=multi-user.target
+      notify: Restart vector service
+
+    - name: Reload systemd and start Vector
+      ansible.builtin.systemd:
+        daemon_reload: yes
+        name: vector
+        state: started
+        enabled: true

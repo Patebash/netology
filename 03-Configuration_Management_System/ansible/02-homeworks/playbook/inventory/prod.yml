@@ -1,0 +1,7 @@
+---
+clickhouse:
+  hosts:
+    clickhouse-01:
+      ansible_host: 213.165.208.132
+      ansible_user: centos
+      ansible_ssh_private_key_file: ~/.ssh/id_rsa
