@@ -1,0 +1,6 @@
+---
+
+db_user: vector
+db_password: vector
+db_name: default
+db_table: example
