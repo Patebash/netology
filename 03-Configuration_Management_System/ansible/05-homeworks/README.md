@@ -18,4 +18,35 @@
 
 ![](images/task1.png)
 
-3. 
+3-5. В роли используется systemd, поэтому для тестирования были использованы следующие образы:
+
+```
+geerlingguy/docker-debian12-ansible:latest
+geerlingguy/docker-fedora43-ansible:latest
+```
+
+#### Destroy
+
+![](images/task2.png)
+
+#### Create
+
+![](images/task3.png)
+
+#### Converge
+
+![](images/task4.png)
+
+#### Converge-idempotence
+
+![](images/task5.png)
+
+#### Verify
+
+![](images/task6.png)
+
+#### Destroy
+
+![](images/task7.png)
+
+6.
