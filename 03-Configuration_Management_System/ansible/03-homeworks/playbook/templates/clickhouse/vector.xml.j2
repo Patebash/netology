@@ -1,0 +1,26 @@
+<yandex>
+    <quotas>
+        <log_quota>
+            <interval>
+                <duration>3600</duration>
+                <queries>0</queries>
+                <errors>0</errors>
+                <result_rows>0</result_rows>
+                <read_rows>0</read_rows>
+                <execution_time>0</execution_time>
+            </interval>
+        </log_quota>
+    </quotas>
+  <users>
+        <{{ db_user }}>
+            <password>{{ db_user_password }}</password>
+            <networks>
+                <ip>0.0.0.0/0</ip>
+            </networks>
+            <quota>log_quota</quota>
+            <grants>
+                <grant>ALL ON {{ db_name }}.{{ db_table }}</grant>
+            </grants>
+        </{{ db_user }}>
+    </users>
+</yandex>

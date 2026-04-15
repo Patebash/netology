@@ -1,0 +1,4 @@
+---
+nginx_user: root
+lighthouse_base_dir: /etc/lighthouse
+lighthouse_log_name: lightlog_access

@@ -1,0 +1,160 @@
+- name: Install Clickhouse
+  hosts: clickhouse
+  handlers:
+    - name: Restart clickhouse service
+      become: true
+      ansible.builtin.service:
+        name: clickhouse-server
+        state: restarted
+  tasks:
+    - name: Get disrib for clickhouse
+      block:
+        - name: Get clickhouse distrib
+          ansible.builtin.get_url:
+            url: "https://packages.clickhouse.com/rpm/stable/{{ item }}-{{ clickhouse_version }}.noarch.rpm"
+            dest: "./{{ item }}-{{ clickhouse_version }}.rpm"
+            mode: "0755"
+          with_items: "{{ clickhouse_packages }}"
+      rescue:
+        - name: Get clickhouse distrib
+          ansible.builtin.get_url:
+            url: "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
+            dest: "./clickhouse-common-static-{{ clickhouse_version }}.rpm"
+            mode: "0755"
+    - name: Install clickhouse packages
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - clickhouse-common-static-{{ clickhouse_version }}.rpm
+          - clickhouse-client-{{ clickhouse_version }}.rpm
+          - clickhouse-server-{{ clickhouse_version }}.rpm
+        disable_gpg_check: true
+      notify: Restart clickhouse service
+    - name: Set listen config
+      become: true
+      ansible.builtin.template:
+        src: templates/clickhouse/listen.xml.j2
+        dest: /etc/clickhouse-server/config.d/listen.xml
+        mode: "0644"
+        owner: root
+        group: root
+      notify: Restart clickhouse service
+    - name: Flush clickhouse handlers
+      ansible.builtin.meta: flush_handlers
+    - name: Create database
+      ansible.builtin.command: "clickhouse-client --host 127.0.0.1 --port 9000 -q 'create database {{ db_name }};'"
+      ignore_errors: true
+      register: create_db
+      failed_when: create_db.rc != 0 and create_db.rc != 82
+      changed_when: create_db.rc == 0
+    - name: Create table
+      ansible.builtin.command: "clickhouse-client --host 127.0.0.1 --port 9000 -q 'create table {{ db_name }}.{{ db_table }} ( \
+        \"host\" String, \
+        \"message\" String, \
+        \"source_type\" String, \
+        \"timestamp\" String) engine=Log;'"
+      ignore_errors: true
+      register: create_table
+      failed_when: create_table.rc != 0 and create_table.rc != 82
+      changed_when: create_table.rc == 0
+    - name: Set vector user config
+      become: true
+      ansible.builtin.template:
+        src: templates/clickhouse/vector.xml.j2
+        dest: /etc/clickhouse-server/users.d/vector.xml
+        mode: "0644"
+        owner: root
+        group: root
+      notify: Restart clickhouse service
+    - name: Flush handlers
+      ansible.builtin.meta: flush_handlers
+- name: Install vector
+  hosts: vector
+  handlers:
+    - name: Restart vector service
+      become: true
+      ansible.builtin.systemd:
+        name: vector
+        state: restarted
+  tasks:
+    - name: Get vector packages for dpkg
+      ansible.builtin.get_url:
+        url: "https://apt.vector.dev/pool/v/ve/vector_{{ vector_version }}-1_{{ vector_arch_deb }}.deb"
+        dest: "/tmp/vector-{{ vector_version }}-{{ vector_arch_deb }}.deb"
+        mode: "0755"
+    - name: Install vector packages
+      become: true
+      when: not ansible_check_mode
+      ansible.builtin.apt:
+        deb: "/tmp/vector-{{ vector_version }}-{{ vector_arch_deb }}.deb"
+      notify: Restart vector service
+    - name: Set vector config
+      become: true
+      when: not ansible_check_mode
+      ansible.builtin.template:
+        src: templates/vector/vector.conf.j2
+        dest: /etc/vector/vector.yaml
+        mode: "0644"
+        owner: root
+        group: root
+      notify: Restart vector service
+    - name: Flush vector handlers
+      ansible.builtin.meta: flush_handlers
+    - name: Create log path
+      ansible.builtin.file:
+        path: /tmp/vector_test.log
+        state: touch
+        mode: "0644"
+- name: Install nginx
+  hosts: lighthouse
+  become: true
+  handlers:
+    - name: Restart nginx service
+      ansible.builtin.systemd:
+        name: nginx
+        state: restarted
+    - name: Reload nginx
+      ansible.builtin.command: nginx -s reload
+      register: my_output
+      changed_when: my_output.rc != 0
+  tasks:
+    - name: Install nginx packages
+      ansible.builtin.package:
+        name: nginx
+      notify: Restart nginx service
+    - name: Generate main config
+      when: not ansible_check_mode
+      ansible.builtin.template:
+        src: templates/lighthouse//nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+        mode: "0644"
+      notify: Reload nginx
+    - name: Flush nginx handlers
+      ansible.builtin.meta: flush_handlers
+- name: Install lighthouse
+  hosts: lighthouse
+  become: true
+  handlers:
+    - name: Reload nginx
+      ansible.builtin.command: nginx -s reload
+      register: my_output
+      changed_when: my_output.rc != 0
+  pre_tasks:
+    - name: Install git
+      ansible.builtin.package:
+        name: git
+  tasks:
+    - name: Get lighthouse repo
+      ansible.builtin.git:
+        repo: https://github.com/VKCOM/lighthouse.git
+        version: master
+        dest: "{{ lighthouse_base_dir }}"
+    - name: Generate lighthouse config
+      when: not ansible_check_mode
+      ansible.builtin.template:
+        src: templates/lighthouse/lighthouse.conf.j2
+        dest: /etc/nginx/conf.d/default.conf
+        mode: "0644"
+      notify: Reload nginx
+    - name: Flush handlers
+      ansible.builtin.meta: flush_handlers

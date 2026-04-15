@@ -1,0 +1,4 @@
+---
+vector_version: 0.51.1
+vector_arch_deb: amd64
+log_path: /tmp/vector_test.log

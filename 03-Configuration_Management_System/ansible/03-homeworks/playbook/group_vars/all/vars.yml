@@ -1,0 +1,6 @@
+---
+db_user: vector_log
+db_user_password: vector_pass
+db_name: logs
+db_table: example
+db_port: 8123
