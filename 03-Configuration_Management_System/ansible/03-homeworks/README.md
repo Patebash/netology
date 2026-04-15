@@ -106,3 +106,21 @@ ansible-playbook -i inventory/prod.yml site.yml
 - Nginx установлен и работает
 - Lighthouse доступен через веб-интерфейс
 - Все сервисы добавлены в автозагрузку
+
+### Скриншоты выполнения задания
+
+#### 1. Play Clickhouse
+
+![](images/task3.png)
+
+#### 2. Play Vector
+
+![](images/task3-1.png)
+
+#### 3. Play Lighthouse
+
+![](images/task3-2.png)
+
+#### 4. ansible-lint
+
+![](images/task3-3.png)
