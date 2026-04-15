@@ -3,17 +3,17 @@
 clickhouse:
   hosts:
     clickhouse-01:
-      ansible_host: 84.252.140.89
-      ansible_user: fedora
+      ansible_host: IP
+      ansible_user: username
 
 vector:
   hosts:
     vector-01:
-      ansible_host: 111.88.145.144
-      ansible_user: ubuntu
+      ansible_host: IP
+      ansible_user: username
 
 lighthouse:
   hosts:
     lighthouse-01:
-      ansible_host: 84.252.141.95
-      ansible_user: ubuntu
+      ansible_host: IP
+      ansible_user: username
