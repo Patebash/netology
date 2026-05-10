@@ -49,4 +49,4 @@ geerlingguy/docker-fedora43-ansible:latest
 
 ![](images/task7.png)
 
-6.
+6. Ссылка на тег коммита vector-role https://github.com/Patebash/vector-role/releases/tag/v1.1.0
