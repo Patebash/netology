@@ -70,4 +70,4 @@ geerlingguy/docker-fedora43-ansible:latest
 
 ![](images/task12.png)
 
-7. Ссылка на версию [vector-role](https://github.com/Patebash/vector-role/tree/v1.1.0) с ценарием podman.
+7. Ссылка на версию [vector-role](https://github.com/Patebash/vector-role/tree/v1.2.0) с ценарием podman.
