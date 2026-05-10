@@ -49,4 +49,25 @@ geerlingguy/docker-fedora43-ansible:latest
 
 ![](images/task7.png)
 
-6. Ссылка на тег коммита vector-role https://github.com/Patebash/vector-role/releases/tag/v1.1.0
+6. Ссылка на версию [vector-role](https://github.com/Patebash/vector-role/tree/v1.1.0) с ценарием docker.
+
+### Tox
+
+1-6. При первом запускей tox завершился ошибками из-за конфликта зависимостей. 
+Сборка **py37-ansible28** падает, потому что **Python 3.7** уже не поддерживается современными версиями Ansible (начиная с 2.12+). Предупреждение **CryptographyDeprecationWarning** указывает на использование устаревшего Python и зависимостей, которые больше не поддерживаются. Дополнительно, устаревшая версия ansible-galaxy приводит к ошибкам при установке зависимостей из-за несовместимости API.
+
+Отредактировал tox.ini, прописал зависимости определенных версий пакетов.
+
+![](images/task8.png)
+
+Так как вывод достаточно большой, приложил скрины одно из сценария, а именно **py39-ansible28**:
+
+![](images/task9.png)
+![](images/task10.png)
+![](images/task11.png)
+
+Так же прикладываю итоговый результат выполнения тестирования:
+
+![](images/task12.png)
+
+7. Ссылка на версию [vector-role](https://github.com/Patebash/vector-role/tree/v1.1.0) с ценарием podman.
