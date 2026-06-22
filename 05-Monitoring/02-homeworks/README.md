@@ -36,3 +36,24 @@ node_load15
 ![grafana-metric](images/task2.png)
 
 ---
+
+## Задание 3:
+
+> Создайте для каждой Dashboard подходящее правило alert. В качестве решения задания приведите скриншот вашей итоговой Dashboard.
+
+### Ответ:
+
+![alerts](images/task3.png)
+![alert-rules](images/task3-1.png)
+![telegram-alert](images/task3-2.png)
+
+---
+
+## Задание 4:
+
+> Сохраните ваш Dashboard. Скопируйте отображаемое json-содержимое в отдельный файл и сохраните его.
+В качестве решения задания приведите листинг этого файла.
+
+### Ответ:
+
+Ссылка на dashboard.json полный [JSON из Grafana](dashboard.json)
