@@ -34,7 +34,7 @@
 
 **1. Создал pod:**
 
-[netology-web-pod.yaml](manifests/pods/hello-world-pod.yaml)
+[netology-web-pod.yaml](manifests/pods/[netology-web-pod.yaml)
 
 ![image](images/task5.png)
 
