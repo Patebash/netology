@@ -65,25 +65,25 @@
 
 *Создал Deployment nginx:*
 
-![image](images/task9.png)]
+![image](images/task9.png)
 
 [init-deployment.yaml](manifests/deployments/init-deployment.yaml)
 
 **2. Убедиться, что nginx не стартует. В качестве Init-контейнера взять busybox.**
 
-![image](images/task10.png)]
+![image](images/task10.png)
 
 **3. Создать и запустить Service. Убедиться, что Init запустился.**
 
 *Создал и запустил сервисе, убедился что pod в статусе Running:*
 
-![image](images/task11.png)]
+![image](images/task11.png)
 
 [init-service.yaml](manifests/services/init-service.yaml)
 
 *Так же демонстрирую события Events, в котором указан порядок запуска контейнеров:*
 
-![image](images/task12.png)]
+![image](images/task12.png)
 
 **4. Продемонстрировать состояние пода до и после запуска сервиса.**
 
