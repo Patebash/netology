@@ -27,3 +27,41 @@
 ![image](images/task3.png)
 
 [service-nodeport.yaml](manifests/services/service-nodeport.yaml)
+
+---
+
+## Задание 2: Настройка Ingress
+> 1. Развернуть два Deployment;
+> 2. Создать Service для каждого приложения;
+> 3. Включить Ingress-контроллер;
+> 4. Создать Ingress, который:
+>    * Открывает frontend по пути /;
+>    * Открывает backend по пути /api.
+> 5. Проверить доступность.
+
+**1. Развернуть два Deployment**
+
+![image](images/task4.png)
+
+[deployment-frontend.yaml](manifests/deployments/deployment-frontend.yaml)
+
+[deployment-backend.yaml](manifests/deployments/deployment-backend.yaml)
+
+**2. Создать Service для каждого приложения**
+
+![image](images/task5.png)
+
+[service-frontend.yaml](manifests/services/service-frontend.yaml)
+
+[service-backend.yaml](manifests/services/service-backend.yaml)
+
+**3. Включить Ingress-контроллер**
+
+![image](images/task6.png)
+
+**4,5. Создать Ingress, который: Открывает frontend по пути /; Открывает backend по пути /api. Проверить доступность.**
+
+![image](images/task7.png)
+
+[ingress.yaml](manifests/ingress/ingress.yaml)
+
