@@ -11,6 +11,7 @@
 ## Ответ:
 
 ![image](images/task1.png)
+
 ![image](images/task2.png)
 
 [containers-data-exchange.yaml](manifests/deployments/containers-data-exchange.yaml)
