@@ -10,7 +10,7 @@
 
 ## Ответ:
 
-
+![image](images/task1.png)
 
 ![image](images/task2.png)
 
