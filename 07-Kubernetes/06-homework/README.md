@@ -17,7 +17,9 @@
 *Создал Deployment, создал Configmap и проверил доступность страницы index.html:*
 
 ![image](images/task1.png)
+
 ![image](images/task2.png)
+
 ![image](images/task3.png)
 
 [deployment.yaml](manifests/deployments/deployment.yaml)
