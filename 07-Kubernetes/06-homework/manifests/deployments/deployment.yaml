@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: nginx-configmap
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: nginx-configmap
+
+  template:
+
+    metadata:
+      labels:
+        app: nginx-configmap
+
+    spec:
+
+      volumes:
+
+      - name: web-content
+
+        configMap:
+
+          name: nginx-web
+
+      containers:
+
+      - name: nginx
+
+        image: nginx:latest
+
+        ports:
+
+        - containerPort: 80
+
+        volumeMounts:
+
+        - name: web-content
+
+          mountPath: /usr/share/nginx/html/index.html
+
+          subPath: index.html
+
+      - name: multitool
+
+        image: wbitt/network-multitool
+
+        env:
+        - name: HTTP_PORT
+          value: "8080"
+
+        ports:
+
+        - containerPort: 8080
