@@ -23,6 +23,7 @@
 ![image](images/task3.png)
 
 [deployment.yaml](manifests/deployments/deployment.yaml)
+
 [configmap-web.yaml](manifests/configmaps/configmap-web.yaml)
 
 ---
@@ -43,5 +44,7 @@
 ![image](images/task4.png)
 
 [secret-tls.yaml](manifests/secret/secret-tls.yaml)
+
 [ingress-tls.yaml](manifests/ingress/ingress-tls.yaml)
+
 [nginx-service.yaml](manifests/services/nginx-service.yaml)
