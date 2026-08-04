@@ -48,3 +48,49 @@
 [ingress-tls.yaml](manifests/ingress/ingress-tls.yaml)
 
 [nginx-service.yaml](manifests/services/nginx-service.yaml)
+
+---
+
+## Задание 3: Настройка RBAC
+>
+> Создать пользователя с ограниченными правами (только просмотр логов и описания подов).
+> Шаги выполнения:
+> 1. Включите RBAC в microk8s;
+> 2. Создать SSL-сертификат для пользователя;
+> 3. Создать Role (только просмотр логов и описания подов) и RoleBinding;
+> 4. Проверить доступ.
+
+
+## Ответ:
+
+*Создал SSL-сертификат для пользователя:*
+
+```bash
+$ genrsa -out developer.key 2048
+
+$ openssl req \
+-new \
+-key developer.key \
+-out developer.csr \
+-subj "/CN=developer"
+
+$ sudo openssl x509 \
+-req \
+-in developer.csr \
+-CA /var/snap/microk8s/current/certs/ca.crt \
+-CAkey /var/snap/microk8s/current/certs/ca.key \
+-CAcreateserial \
+-out developer.crt \
+-days 365
+Certificate request self-signature ok
+subject=CN = developer
+```
+![image](images/task5.png)
+
+*Создать Role и RoleBinding, проверил права доступа:*
+
+![image](images/task6.png)
+
+[role-pod-reader.yaml](manifests/role/role-pod-reader.yaml)
+
+[rolebinding-developer.yaml](manifests/rolebinding/rolebinding-developer.yaml)
