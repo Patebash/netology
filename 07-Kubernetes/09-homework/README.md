@@ -46,6 +46,8 @@ backend ───► frontend    ❌
 
 **Из cache:**
 
+![image](images/task5.png)
+
 ```
 cache ───► frontend   ❌
 
