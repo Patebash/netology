@@ -1,0 +1,46 @@
+### Cloud parametrs
+
+service_account_key_file = "path/to/key.json"
+
+cloud_id = "YOUR_CLOUD_ID"
+
+folder_id = "YOUR_FOLDER_ID"
+
+default_zone = "ru-central1-b"
+
+public_subnet_cidr  = "192.168.10.0/24"
+private_subnet_cidr = "192.168.20.0/24"
+
+### NAT VM parameters
+
+nat_instance_ip = "192.168.10.254"
+
+nat_vm_resources = {
+  cores         = 2
+  memory        = 2
+  core_fraction = 20
+}
+
+nat_vm_disk = {
+  size = 10
+  type = "network-hdd"
+}
+
+nat_vm_preemptible = true
+
+### VM parameters
+
+vm_image_family = "ubuntu-2404-lts"
+
+vm_resources = {
+  cores         = 2
+  memory        = 2
+  core_fraction = 20
+}
+
+vm_disk = {
+  size = 10
+  type = "network-hdd"
+}
+
+vm_preemptible = true
