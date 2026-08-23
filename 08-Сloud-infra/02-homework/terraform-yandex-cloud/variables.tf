@@ -30,11 +30,6 @@ variable "public_subnet_cidr" {
 
 ### VM instance vars
 
-variable "vm_image_family" {
-  type        = string
-  description = "Image family for regular virtual machines"
-}
-
 variable "vm_resources" {
   type = object({
     cores         = number
