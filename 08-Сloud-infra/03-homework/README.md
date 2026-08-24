@@ -11,7 +11,7 @@
 
 **создан симметричный ключ в Yandex Key Management Service (KMS):**
 
-
+![image](images/task1.png)
 
 **создан Object Storage bucket pat-yc-images:**
 
